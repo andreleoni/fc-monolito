@@ -28,8 +28,8 @@ async function setupDb() {
   await sequelize.addModels([
     InvoiceInvoiceModel,
     InvoiceInvoiceProductModel,
-    ClientAdmClientModel,
     ProductAdmProductModel,
+    ClientAdmClientModel,
     PaymentTransactionModel,
     StoreCatalogProductModel,
   ]);
