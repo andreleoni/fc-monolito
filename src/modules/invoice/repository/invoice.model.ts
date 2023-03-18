@@ -4,7 +4,6 @@ import InvoiceProductModel from "./invoice-product.model";
 import { Column, BelongsToMany, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({ tableName: "invoices", timestamps: false })
-
 export default class InvoiceModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
@@ -40,7 +39,7 @@ export default class InvoiceModel extends Model {
   items: ProductModel[];
 
   @HasMany(() => InvoiceProductModel)
-  userRoles!: InvoiceProductModel[];
+  invoiceProducts: InvoiceProductModel[];
 
   @Column({ allowNull: false, field: "created_at" })
   createdAt: Date;

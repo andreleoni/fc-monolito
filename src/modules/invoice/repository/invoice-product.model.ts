@@ -3,7 +3,6 @@ import InvoiceModel from "./invoice.model";
 import ProductModel from "./product.model";
 
 @Table({ tableName: "invoice_products", timestamps: false })
-
 export default class InvoiceProductModel extends Model {
   @BelongsTo(() => InvoiceModel)
   invoice: InvoiceModel;
