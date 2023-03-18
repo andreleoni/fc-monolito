@@ -33,13 +33,13 @@ export default class InvoiceModel extends Model {
   @Column({ allowNull: false })
   address_zipCode: string;
 
-  @BelongsToMany(() => ProductModel, {
-    through: { model: () => InvoiceProductModel },
-  })
-  items: ProductModel[];
+  // @BelongsToMany(() => ProductModel, {
+  //   through: { model: () => InvoiceProductModel },
+  // })
+  // items: ProductModel[];
 
-  @HasMany(() => InvoiceProductModel)
-  invoiceProducts: InvoiceProductModel[];
+  // @HasMany(() => InvoiceProductModel)
+  // invoiceProducts: InvoiceProductModel[];
 
   @Column({ allowNull: false, field: "created_at" })
   createdAt: Date;

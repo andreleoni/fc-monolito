@@ -12,7 +12,7 @@ import { default as StoreCatalogProductModel } from "../../modules/store-catalog
 
 export const app: Express = express();
 app.use(express.json());
-app.use("/product", productsRoute);
+app.use("/products", productsRoute);
 // app.use("/client", clientsRoute);
 // app.use("/checkout", checkoutRoute);
 
@@ -28,10 +28,10 @@ async function setupDb() {
   await sequelize.addModels([
     InvoiceInvoiceModel,
     InvoiceInvoiceProductModel,
-    ProductAdmProductModel,
     ClientAdmClientModel,
     PaymentTransactionModel,
     StoreCatalogProductModel,
+    ProductAdmProductModel,
   ]);
   await sequelize.sync();
 }

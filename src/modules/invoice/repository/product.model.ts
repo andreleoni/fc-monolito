@@ -9,6 +9,6 @@ export default class ProductModel extends Model {
   @Column({ allowNull: false })
   name: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: "price" })
   price: number;
 }
