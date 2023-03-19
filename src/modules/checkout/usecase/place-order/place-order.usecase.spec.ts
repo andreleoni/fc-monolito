@@ -1,5 +1,7 @@
 import PlaceOrderUseCase from "./place-order.usecase"
 import { PlaceOrderInputDto } from "./place-order.dto"
+import Product from "../../domain/product.entity"
+import Id from "../../../@shared/domain/value-object/id.value-object";
 
 describe("PlaceOrderUseCase unit test", () => {
   describe("validateProducts method", () => {
@@ -61,6 +63,41 @@ describe("PlaceOrderUseCase unit test", () => {
         new Error("Product not found")
       )
     })
+
+    it("should return a product", async() => {
+      const mockStoreCatalogFacade = {
+        find: jest.fn().mockResolvedValue({
+          id: "0",
+          name: "Product 0",
+          description: "Product 0 description",
+          salesPrice: 0,
+        }),
+        findAll: jest.fn().mockResolvedValue(null),
+      }
+
+      const mockClientFacade = {
+        find: jest.fn().mockResolvedValue(null),
+        add: jest.fn().mockResolvedValue(null)
+      }
+
+      const mockProductFacade = {
+        checkStock: jest.fn().mockResolvedValue(null),
+        addProduct: jest.fn().mockResolvedValue(null)
+      };
+
+      const placeOrderUseCase = new PlaceOrderUseCase(mockClientFacade, mockProductFacade, mockStoreCatalogFacade);
+
+      await expect(placeOrderUseCase["getProduct"]("0")).resolves.toEqual(
+        new Product({
+          id: new Id("0"),
+          name: "Product 0",
+          description: "Product 0 description",
+          salesPrice: 0,
+        })
+      )
+
+      expect(mockStoreCatalogFacade.find).toHaveBeenCalledTimes(1);
+    });
   })
 
   it("should throw error when products is out of stock", async() => {
