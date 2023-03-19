@@ -353,6 +353,39 @@ describe("PlaceOrderUseCase unit test", () => {
 
         expect(mockInvoiceFacade.generate).toHaveBeenCalledTimes(0);
       })
+
+      it("should be approved", async() => {
+        mockPaymentFacade.process = mockPaymentFacade.process.mockReturnValue({
+          transactionId: "1t",
+          orderId: "1o",
+          amount: 100,
+          status: "approved",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+
+        const input: PlaceOrderInputDto = {
+          clientId: "1c",
+          products: [{ productId: "1" }, { productId: "2" }],
+        }
+
+        let output = await placeOrderUseCase.execute(input);
+
+        expect(output.invoiceId).toBeDefined();
+        expect(output.total).toBe(70);
+        expect(output.products).toStrictEqual([
+          { productId: "1" }, { productId: "2" }
+        ])
+        expect(mockClientFacade.find).toHaveBeenCalledTimes(1);
+        expect(mockClientFacade.find).toHaveBeenCalledWith({ id: "1c" });
+        expect(mockValidateProducts).toHaveBeenCalledTimes(1);
+        expect(mockGetProduct).toHaveBeenCalledTimes(2);
+        expect(mockCheckoutRepo.addOrder).toHaveBeenCalledTimes(1);
+        expect(mockPaymentFacade.process).toHaveBeenCalledTimes(1);
+        expect(mockPaymentFacade.process).toHaveBeenCalledWith({ orderId: output.id, amount: output.total });
+
+        expect(mockInvoiceFacade.generate).toHaveBeenCalledTimes(1);
+      })
     })
   })
 })
