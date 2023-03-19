@@ -16,6 +16,7 @@ clientsRoute.post("/", async (req: Request, res: Response) => {
     };
 
     const output = await usecase.execute(clientAddDto);
+
     res.send(output);
   } catch (err) {
     res.status(500).send(err);

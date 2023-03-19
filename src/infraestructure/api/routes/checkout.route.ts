@@ -6,6 +6,7 @@ export const checkoutRoute = express.Router();
 
 checkoutRoute.post("/", async (req: Request, res: Response) => {
   const usecase = new PaymentProcessUseCase(new PaymentTransactionRepository());
+
   try {
     let req_body = req.body;
 
