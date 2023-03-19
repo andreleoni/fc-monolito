@@ -254,12 +254,12 @@ describe("PlaceOrderUseCase unit test", () => {
       }
 
       const mockStoreCatalogFacade = {
-        find: jest.fn().mockResolvedValue(clientProps),
+        find: jest.fn().mockResolvedValue(null),
         findAll: jest.fn().mockResolvedValue(null),
       }
 
       const mockClientFacade = {
-        find: jest.fn().mockResolvedValue(true),
+        find: jest.fn().mockResolvedValue(clientProps),
         add: jest.fn().mockResolvedValue(null)
       }
 
@@ -385,6 +385,28 @@ describe("PlaceOrderUseCase unit test", () => {
         expect(mockPaymentFacade.process).toHaveBeenCalledWith({ orderId: output.id, amount: output.total });
 
         expect(mockInvoiceFacade.generate).toHaveBeenCalledTimes(1);
+        expect(mockInvoiceFacade.generate).toHaveBeenCalledWith({
+          name: clientProps.name,
+          document: clientProps.document,
+          street: clientProps.street,
+          number: clientProps.number,
+          complement: clientProps.complement,
+          city: clientProps.city,
+          state: clientProps.state,
+          zipCode: clientProps.zipCode,
+          items: [
+            {
+              id: products["1"].id.id,
+              name: products["1"].name,
+              price: products["1"].salesPrice,
+            },
+            {
+              id: products["2"].id.id,
+              name: products["2"].name,
+              price: products["2"].salesPrice,
+            }
+          ]
+        });
       })
     })
   })
