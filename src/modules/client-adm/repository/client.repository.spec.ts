@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import Client from "../domain/client.entity";
-import ClientModel from "./client.model";
 import ClientRepository from "./client.repository";
+import ClientModel from "./client.model";
 
 describe("ClientRepository test", () => {
   let sequelize: Sequelize;
@@ -16,7 +16,6 @@ describe("ClientRepository test", () => {
     });
 
     sequelize.addModels([ClientModel]);
-
     await sequelize.sync();
   });
 
