@@ -1,28 +1,25 @@
-import express, { Request, Response } from "express";
-import GenerateInvoiceUseCase from "../../../modules/invoice/usecase/generate-invoice/generate-invoice.usecase";
-import GenerateInvoiceRepository from "../../../modules/invoice/repository/invoice.repository"
+import express, { Request, Response } from 'express';
+import FindInvoiceUseCase from '../../../modules/invoice/usecase/find-invoice/find-invoice.usecase';
+import InvoiceRepository from '../../../modules/invoice/repository/invoice.repository';
+import GenerateInvoiceUseCase from '../../../modules/invoice/usecase/generate-invoice/generate-invoice.usecase';
+import { Sequelize } from 'sequelize-typescript';
+import ProductModel from '../../../modules/invoice/repository/product.model';
+import InvoiceModel from '../../../modules/invoice/repository/invoice.model';
 
-export const invoicesRoute = express.Router();
+export const invoiceRoute = express.Router();
 
-invoicesRoute.get("/:id", async (req: Request, res: Response) => {
-  const usecase = new GenerateInvoiceUseCase(new GenerateInvoiceRepository());
+export let sequelize: Sequelize;
+
+invoiceRoute.get('/:invoiceId', async (req: Request, res: Response) => {
+  const usecase = new FindInvoiceUseCase(new InvoiceRepository());
+
   try {
-    let req_body = req.body;
+    const invoiceId = String(req.params.invoiceId);
 
-    const invoiceCreateDto = {
-      name: req_body.name,
-      document: req_body.document,
-      street: req_body.street,
-      number: req_body.number,
-      complement: req_body.complement,
-      city: req_body.city,
-      state: req_body.state,
-      zipCode: req_body.zip_code,
-      items: req_body.items,
-    };
+    const output = await usecase.execute({ id: invoiceId });
 
-    const output = await usecase.execute(invoiceCreateDto);
     res.send(output);
+
   } catch (err) {
     res.status(500).send(err);
   }

@@ -13,7 +13,7 @@ export default class ProductModel extends Model {
   @Column({ allowNull: false })
   description: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: "price" })
   salesPrice: number;
 
   @ForeignKey(() => OrderModel)
@@ -22,4 +22,13 @@ export default class ProductModel extends Model {
 
   @BelongsTo(() => OrderModel)
   order: OrderModel;
+
+  @Column({ allowNull: false, field: "stock" })
+  stock: number;
+
+  @Column({ allowNull: false })
+  createdAt: Date;
+
+  @Column({ allowNull: false })
+  updatedAt: Date;
 }
