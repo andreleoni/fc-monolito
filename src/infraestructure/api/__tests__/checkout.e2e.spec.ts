@@ -37,6 +37,7 @@ describe("E2E test for checkout", () => {
       InvoiceModel,
       InvoiceProductModel,
     ]);
+
     await sequelize.sync({ force: true });
   });
 
