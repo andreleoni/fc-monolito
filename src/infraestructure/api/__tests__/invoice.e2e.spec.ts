@@ -3,6 +3,7 @@ import request from "supertest";
 import { Sequelize } from 'sequelize-typescript';
 import ProductModel from '../../../modules/invoice/repository/product.model';
 import InvoiceModel from '../../../modules/invoice/repository/invoice.model';
+import InvoiceProductModel from '../../../modules/invoice/repository/invoice-product.model';
 
 describe("E2E test for invoice", () => {
   let sequelize: Sequelize;
@@ -15,7 +16,7 @@ describe("E2E test for invoice", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([InvoiceModel, ProductModel]);
+    sequelize.addModels([InvoiceModel, InvoiceProductModel, ProductModel]);
 
     await sequelize.sync({ force: true });
   });
@@ -51,6 +52,7 @@ describe("E2E test for invoice", () => {
         ]
     });
 
+    console.log(outputInvoiceCreated)
     expect(status).toBe(200);
 
     expect(outputInvoiceCreated.name).toBe("invoice 1");

@@ -10,13 +10,14 @@ describe("E2E test for product", () => {
     await sequelize.close();
   });
 
-  it("should create a product", async () => {
+  it("creates a product", async () => {
     const input = {
       name: "Shirt",
       description: "T-Shirt description",
       stock: 1,
       price: 100,
     }
+
     const response = await request(app)
       .post("/products")
       .send(input);

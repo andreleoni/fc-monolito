@@ -8,7 +8,6 @@ export default class InvoiceProductModel extends Model {
   invoice: InvoiceModel;
 
   @ForeignKey(() => InvoiceModel)
-  @PrimaryKey
   @Column({ allowNull: false })
   invoiceId: string;
 
@@ -16,7 +15,6 @@ export default class InvoiceProductModel extends Model {
   product: ProductModel;
 
   @ForeignKey(() => ProductModel)
-  @PrimaryKey
   @Column({ allowNull: false })
   productId: string;
 }

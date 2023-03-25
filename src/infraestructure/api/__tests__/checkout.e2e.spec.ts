@@ -27,6 +27,7 @@ describe("E2E test for checkout", () => {
         })
       ),
     }))
+
     jest.spyOn(GenerateInvoiceUseCase, 'default').mockImplementation(() => ({
       // @ts-ignore
       execute: jest.fn((invoice) => Promise.resolve({ id: invoiceId })),
@@ -74,6 +75,7 @@ describe("E2E test for checkout", () => {
         clientId: "1",
         products: [{ productId: "1" }],
       });
+
     expect(response.status).toBe(200);
     expect(response.body.id).toBeDefined()
     expect(response.body.invoiceId).toBeDefined()
