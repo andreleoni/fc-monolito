@@ -33,12 +33,10 @@ checkoutRoute.post("/", async (req: Request, res: Response) => {
             products: req.body.products
         }
 
-        console.log("AQUI 1")
         const output = await usecase.execute(input)
 
         res.send(output)
     } catch (err) {
-      console.log(err)
-        res.status(500).send(err)
+      res.status(500).send(err)
     }
 });
