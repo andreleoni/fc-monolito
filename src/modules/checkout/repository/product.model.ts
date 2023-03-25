@@ -22,13 +22,4 @@ export default class ProductModel extends Model {
 
   @BelongsTo(() => OrderModel)
   order: OrderModel;
-
-  @Column({ allowNull: false, field: "stock" })
-  stock: number;
-
-  @Column({ allowNull: false })
-  createdAt: Date;
-
-  @Column({ allowNull: false })
-  updatedAt: Date;
 }

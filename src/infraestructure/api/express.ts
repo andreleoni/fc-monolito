@@ -14,7 +14,7 @@ import ClientModel from "../../modules/client-adm/repository/client.model";
 
 // Invoice models
 import InvoiceModel from "../../modules/invoice/repository/invoice.model";
-import InvoiceProductModel from "../../modules/invoice/repository/product.model";
+import InvoiceProductModel from "../../modules/invoice/repository/invoice-product.model";
 
 // Transaction models
 import TransactionModel from "../../modules/payment/repository/transaction.model";
