@@ -25,5 +25,11 @@ curl -d '{"name": "leoni test", "email": "email@domain.com", "document": "000000
 # Checkout
 
 ```
-curl -d '{"clientId": "a1246375-98c3-49d3-8b19-535830ca19e3", "products": [{ "productId": "7a580b0c-a269-404a-8ef4-59d7de6ae565" }]}' -H "Content-Type: application/json" -X POST localhost:3030/checkout
+curl -d '{"clientId": "5b5b930e-d0c9-4780-a7af-57a3dcdf6c38", "products": [{ "productId": "bbeea934-c1b5-4a1d-a1d7-72c1d4d4a620" }]}' -H "Content-Type: application/json" -X POST localhost:3030/checkout
+```
+
+# Invoice
+
+```
+curl -H "Content-Type: application/json" -X GET localhost:3030/invoice/:invoiceID
 ```

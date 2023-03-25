@@ -1,5 +1,4 @@
 import { app, sequelize } from "../express";
-import { Sequelize } from "sequelize-typescript";
 import request from "supertest";
 
 describe("E2E test for client", () => {

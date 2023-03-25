@@ -1,5 +1,4 @@
 import { Column, Model, ForeignKey, BelongsTo, PrimaryKey, Table } from "sequelize-typescript";
-import InvoiceModel from "./invoice.model";
 
 @Table({ tableName: "products", timestamps: false })
 export default class ProductModel extends Model {
@@ -9,9 +8,6 @@ export default class ProductModel extends Model {
 
   @Column({ allowNull: false })
   name: string;
-
-  @Column({ allowNull: false })
-  description: string;
 
   @Column({ allowNull: false, field: "price" })
   price: number;
