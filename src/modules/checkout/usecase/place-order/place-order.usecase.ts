@@ -41,8 +41,10 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       throw new Error("Client not found")
     }
 
+    console.log("AQUI 2")
     await this.validateProducts(input)
 
+    console.log("AQUI 3")
     const products = await Promise.all(
       input.products.map((p) => this.getProduct(p.productId))
     );
@@ -65,6 +67,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       products,
     })
 
+    console.log("AQUI 4")
     const payment = await this._paymentFacade.process({
       orderId: order.id.id,
       amount: order.total,
@@ -90,6 +93,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
           })
         }) : null;
 
+    console.log("AQUI 5")
     payment.status === "approved" && order.approved();
     this._repository.addOrder(order);
 

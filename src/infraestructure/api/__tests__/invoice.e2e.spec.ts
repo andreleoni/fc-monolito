@@ -52,7 +52,6 @@ describe("E2E test for invoice", () => {
         ]
     });
 
-    console.log(outputInvoiceCreated)
     expect(status).toBe(200);
 
     expect(outputInvoiceCreated.name).toBe("invoice 1");
