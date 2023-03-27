@@ -13,7 +13,7 @@ export default class ProductModel extends Model {
   @Column({ allowNull: false })
   description: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: "price" })
   salesPrice: number;
 
   @ForeignKey(() => OrderModel)
